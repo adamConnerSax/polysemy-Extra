@@ -1,0 +1,67 @@
+name:                polysemy-RandomFu
+version:             0.1.0.0
+github:              "adamConnerSax/polysemy-RandomFu"
+license:             BSD3
+author:              "Adam Conner-Sax"
+maintainer:          "adam_conner_sax@yahoo.com"
+copyright:           "2019 Adam Conner-Sax"
+
+extra-source-files:
+- Readme.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+synopsis:            Experimental, RandomFu effect and interpreters for polysemy
+category:            Polysemy
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/adamConnerSax/polysemy-extra/polysemy-RandomFu#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- polysemy >= 0.3
+- polysemy-zoo >= 0.2
+- polysemy-plugin
+- random-fu
+- random-source
+
+ghc-options:
+  - -fplugin=Polysemy.Plugin
+
+  # Enable these when building haddock
+  # - -fdefer-type-errors
+  # - -fno-warn-deferred-type-errors
+
+default-extensions:
+  - DataKinds
+  - DeriveFunctor
+  - FlexibleContexts
+  - GADTs
+  - LambdaCase
+  - PolyKinds
+  - RankNTypes
+  - ScopedTypeVariables
+  - StandaloneDeriving
+  - TypeApplications
+  - TypeOperators
+  - TypeFamilies
+  - UnicodeSyntax
+
+library:
+  source-dirs: src
+
+tests:
+  polysemy-RandomFu-test:
+    main:                Main.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - polysemy-zoo
+    - polysemy-RandomFu
+    - hspec
+    - text

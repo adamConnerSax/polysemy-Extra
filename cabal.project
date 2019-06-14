@@ -1,0 +1,8 @@
+packages: ./polysemy-RandomFu 
+jobs: 4
+with-compiler: /usr/local/bin/ghc
+benchmarks: false
+
+
+
+
