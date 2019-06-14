@@ -5,10 +5,13 @@
 - Includes an MTL "absorber" (see https://github.com/isovector/polysemy-zoo/blob/master/src/Polysemy/MTL.hs) for
 to random-fu ```MonadRandom``` typeclass.
 
-## Example (from the test)
+## Example (from the tests)
 ```haskell
 import           Polysemy
 import           Polysemy.RandomFu
+
+import qualified Data.Random                   as R
+import qualified Data.Random.Source.PureMT     as R
 
 getRandomInts :: Member RandomFu r => Int -> Sem r [Int]
 getRandomInts nDraws =
@@ -16,8 +19,8 @@ getRandomInts nDraws =
   
 main :: IO ()
 main = do
-  seed <- newPureMT
-  putStrLn . show $ runM . runRandomIOPureMT (R.pureMT seed) $ getRandomInt 5
+  seed <- R.newPureMT
+  putStrLn . show $ runM . runRandomIOPureMT (R.pureMT seed) $ getRandomInts 5
 ```
 should print a list of 5 pseudo-random integers. 
 They will be different each time you run because the ```newPureMT``` function 
