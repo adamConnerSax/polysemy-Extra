@@ -30,4 +30,5 @@ then you will get the *same* pseudo-random sequences each time.  This can be
 useful for testing.
 
 ## Notes
-- See the tests (in test/RandomFuSpec.hs) for more details about how to use this effect
+- See the tests (in https://github.com/adamConnerSax/Polysemy-Extra/blob/master/polysemy-RandomFu/test/RandomFuSpec.hs) 
+for more details about how to use this effect
