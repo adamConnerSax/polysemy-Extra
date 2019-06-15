@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8b08324c19e2b90da9f91c6c9e4b0ec7b189d02891867db140555b58e4c9e461
+-- hash: 5549beea2adbb3d34b8615fcc5c20d018c462a83f4e53a56354298c28b301f67
 
 name:           polysemy-RandomFu
 version:        0.1.0.0
@@ -18,6 +18,7 @@ maintainer:     adam_conner_sax@yahoo.com
 copyright:      2019 Adam Conner-Sax
 license:        BSD3
 license-file:   LICENSE
+tested-with:    GHC ==8.6.4
 build-type:     Simple
 extra-source-files:
     Readme.md
