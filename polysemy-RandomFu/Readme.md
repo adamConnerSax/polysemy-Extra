@@ -1,4 +1,8 @@
-# polysemy-RandomFu
+# polysemy-RandomFu v0.1.0.0
+
+[![Build Status][travis-badge]][travis]
+[![Hackage][hackage-badge]][hackage]
+[![Hackage Dependencies][hackage-deps-badge]][hackage-deps]
 
 ## Summary
 - Polysemy effect and intepreters to use the random-fu library in a polysemy effect union (like an mtl stack).
@@ -32,3 +36,10 @@ useful for testing.
 ## Notes
 - See the tests (in https://github.com/adamConnerSax/Polysemy-Extra/blob/master/polysemy-RandomFu/test/RandomFuSpec.hs) 
 for more details about how to use this effect
+
+[travis]:        <https://travis-ci.org/adamConnerSax/polysemy-extra/polysemy-RandomFu>
+[travis-badge]:  <https://travis-ci.org/adamConnerSax/polysemy-extra/polysemy-RandomFu.svg?branch=master>
+[hackage]:       <https://hackage.haskell.org/package/polysemy-RandomFu>
+[hackage-badge]: <https://img.shields.io/hackage/v/polysemy-RandomFu.svg>
+[hackage-deps-badge]: <https://img.shields.io/hackage-deps/v/polysemy-RandomFu.svg>
+[hackage-deps]: <http://packdeps.haskellers.com/feed?needle=polysemy-RandomFu>

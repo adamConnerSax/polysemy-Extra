@@ -4,15 +4,15 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2cbae3031f180261c4f6f532e83bdf6b06c7c8785995d1276dc213d108b30504
+-- hash: 8b08324c19e2b90da9f91c6c9e4b0ec7b189d02891867db140555b58e4c9e461
 
 name:           polysemy-RandomFu
 version:        0.1.0.0
 synopsis:       Experimental, RandomFu effect and interpreters for polysemy
-description:    Please see the README on GitHub at <https://github.com/adamConnerSax/polysemy-extra/polysemy-RandomFu#readme>
+description:    Please see the README on GitHub at <https://github.com/adamConnerSax/polysemy-Extra/tree/master/polysemy-RandomFu#polysemy-randomfu>
 category:       Polysemy
-homepage:       https://github.com/adamConnerSax/polysemy-RandomFu#readme
-bug-reports:    https://github.com/adamConnerSax/polysemy-RandomFu/issues
+homepage:       https://github.com/adamConnerSax/polysemy-Extra#readme
+bug-reports:    https://github.com/adamConnerSax/polysemy-Extra/issues
 author:         Adam Conner-Sax
 maintainer:     adam_conner_sax@yahoo.com
 copyright:      2019 Adam Conner-Sax
@@ -25,7 +25,8 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: https://github.com/adamConnerSax/polysemy-RandomFu
+  location: https://github.com/adamConnerSax/polysemy-Extra
+  subdir: polysemy-RandomFu
 
 library
   exposed-modules:

@@ -1,6 +1,6 @@
 name:                polysemy-RandomFu
 version:             0.1.0.0
-github:              "adamConnerSax/polysemy-RandomFu"
+github:              "adamConnerSax/polysemy-Extra/polysemy-RandomFu"
 license:             BSD3
 author:              "Adam Conner-Sax"
 maintainer:          "adam_conner_sax@yahoo.com"
@@ -17,7 +17,7 @@ category:            Polysemy
 # To avoid duplicated efforts in documentation and dealing with the
 # complications of embedding Haddock markup inside cabal files, it is
 # common to point users to the README.md file.
-description:         Please see the README on GitHub at <https://github.com/adamConnerSax/polysemy-extra/polysemy-RandomFu#readme>
+description:         Please see the README on GitHub at <https://github.com/adamConnerSax/polysemy-Extra/tree/master/polysemy-RandomFu#polysemy-randomfu>
 
 dependencies:
 - base >= 4.7 && < 5
