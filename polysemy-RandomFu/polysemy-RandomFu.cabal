@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 777ea4b5b6d9962139d55e3c9454e5aad3f243c8782df9abef60ec6ee482f0cd
+-- hash: d9af3ade1d2c849f092821f77e57a2e2192aa6fdd1e7db1f704750b9ee3b0d49
 
 name:           polysemy-RandomFu
 version:        0.1.0.0
@@ -57,10 +57,11 @@ test-suite polysemy-RandomFu-test
       test
   default-extensions: DataKinds DeriveFunctor FlexibleContexts GADTs LambdaCase PolyKinds RankNTypes ScopedTypeVariables StandaloneDeriving TypeApplications TypeOperators TypeFamilies UnicodeSyntax
   ghc-options: -fplugin=Polysemy.Plugin -threaded -rtsopts -with-rtsopts=-N
+  build-tool-depends:
+      hspec-discover:hspec-discover >=2.0
   build-depends:
       base >=4.7 && <5
     , hspec >=2.0
-    , hspec-discover >=2.0
     , polysemy >=0.3
     , polysemy-RandomFu
     , polysemy-plugin >0.2.0.0 && <0.4.0.0
