@@ -19,13 +19,14 @@ category:            Polysemy
 # common to point users to the README.md file.
 description:         Please see the README on GitHub at <https://github.com/adamConnerSax/polysemy-Extra/tree/master/polysemy-RandomFu#polysemy-randomfu>
 
+
 dependencies:
 - base >= 4.7 && < 5
 - polysemy >= 0.3
 - polysemy-zoo >= 0.2
-- polysemy-plugin
-- random-fu
-- random-source
+- polysemy-plugin > 0.2.0.0 && < 0.4.0.0
+- random-fu >= 0.2.5.0 && < 0.3.0.0
+- random-source >= 0.3 && < 0.4.0.0
 
 ghc-options:
   - -fplugin=Polysemy.Plugin
@@ -62,6 +63,7 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - polysemy-zoo
-    - polysemy-RandomFu
-    - hspec
-    - text
+    - polysemy-RandomFu 
+    - hspec >= 2.0
+    - hspec-discover >= 2.0
+    - text >= 1.1.0.0 && < 1.3.0.0

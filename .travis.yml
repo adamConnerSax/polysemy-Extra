@@ -92,7 +92,6 @@ script:
   - ${CABAL} new-build -w ${HC} --disable-tests --disable-benchmarks all
 
   # build & run tests, build benchmarks
-  - cabal new-install hspec-discover
   - ${CABAL} new-build -w ${HC} ${TEST} ${BENCH} all
   - if [ "x$TEST" = "x--enable-tests" ]; then ${CABAL} new-test -w ${HC} ${TEST} ${BENCH} all; fi
 
