@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d9af3ade1d2c849f092821f77e57a2e2192aa6fdd1e7db1f704750b9ee3b0d49
+-- hash: e89883775c3553509da69f581308cc459d3612e23d57d121218e9fd10404766a
 
 name:           polysemy-RandomFu
 version:        0.1.0.0
@@ -31,6 +31,7 @@ source-repository head
 
 library
   exposed-modules:
+      Polysemy.ConstraintAbsorber.MonadRandom
       Polysemy.RandomFu
   other-modules:
       Paths_polysemy_RandomFu

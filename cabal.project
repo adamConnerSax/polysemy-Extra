@@ -1,4 +1,4 @@
-packages: ./polysemy-RandomFu 
+packages: ./polysemy-RandomFu ../polysemy-zoo
 jobs: 4
 with-compiler: /usr/local/bin/ghc
 benchmarks: false

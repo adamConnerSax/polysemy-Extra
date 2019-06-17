@@ -2,6 +2,7 @@
 *~
 .ghc.environment*
 dist-newstyle
+dist
 TAGS
 .\#*
 \#*\#

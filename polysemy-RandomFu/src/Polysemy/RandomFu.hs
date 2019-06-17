@@ -33,14 +33,11 @@ module Polysemy.RandomFu
   , runRandomSource
   , runRandomIO
   , runRandomIOPureMT
-
-    -- * Constraint absorber
-  , absorbMonadRandom
   )
 where
 
 import           Polysemy
-import           Polysemy.MTL
+--import           Polysemy.MTL
 
 import           Data.IORef                     ( newIORef )
 import qualified Data.Random                   as R
@@ -105,35 +102,3 @@ runRandomIOPureMT source re =
   liftIO (newIORef source) >>= flip runRandomSource re
 {-# INLINEABLE runRandomIOPureMT #-}
 
-------------------------------------------------------------------------------
--- | "Absorb" an 'R.MonadRandom' constraint.
--- That is, use a @Member RandomFu r@ constraint to satisfy  the @MonadRandom@
--- constraint in a @(forall m. MonadRandom m => m a), returning a @Sem r a@.
--- See 'Polysemy.MTL' for details.
-absorbMonadRandom
-  :: Member RandomFu r => (R.MonadRandom (Sem r) => Sem r a) -> Sem r a
-absorbMonadRandom = absorb @R.MonadRandom
-{-# INLINEABLE absorbMonadRandom #-}
-
-type instance  CanonicalEffect R.MonadRandom = RandomFu
-
-instance ReifiableConstraint1 (R.MonadRandom) where
-  data Dict1 R.MonadRandom m = MonadRandom
-    {
-      getRandomPrim_ :: forall t. R.Prim t -> m t
-    }
-  reifiedInstance = Sub Dict
-
-
-$(R.monadRandom [d|
-      instance ( Monad m
-               , Reifies s' (Dict1 R.MonadRandom m)
-               ) => R.MonadRandom (ConstrainedAction R.MonadRandom m s') where
-          getRandomPrim t = ConstrainedAction
-            $ getRandomPrim_ (reflect $ Proxy @s') t
-          {-# INLINEABLE getRandomPrim #-}
-  |])
-
-instance Member RandomFu r => IsCanonicalEffect R.MonadRandom r where
-  canonicalDictionary = MonadRandom getRandomPrim
-  {-# INLINEABLE canonicalDictionary #-}
