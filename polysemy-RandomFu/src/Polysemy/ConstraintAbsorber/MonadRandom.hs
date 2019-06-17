@@ -1,8 +1,5 @@
-{-# LANGUAGE FlexibleInstances           #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving  #-}
-{-# LANGUAGE MultiParamTypeClasses       #-}
 {-# LANGUAGE TemplateHaskell             #-}
-{-# LANGUAGE UndecidableInstances        #-}
 
 module Polysemy.ConstraintAbsorber.MonadRandom
   (

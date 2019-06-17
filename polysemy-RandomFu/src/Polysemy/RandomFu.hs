@@ -1,8 +1,4 @@
-{-# LANGUAGE FlexibleInstances     #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE TemplateHaskell       #-}
-{-# LANGUAGE TypeApplications      #-}
-{-# LANGUAGE UndecidableInstances  #-}
 {-|
 Module      : Polysemy.RandomFu
 Description : Polysemy random-fu effect
@@ -41,7 +37,6 @@ import           Polysemy
 
 import           Data.IORef                     ( newIORef )
 import qualified Data.Random                   as R
-import qualified Data.Random.Source            as R
 import qualified Data.Random.Internal.Source   as R
 import qualified Data.Random.Source.PureMT     as R
 import           Control.Monad.IO.Class         ( MonadIO(..) )
