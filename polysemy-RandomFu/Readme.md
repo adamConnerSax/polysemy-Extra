@@ -6,8 +6,8 @@
 
 ## Summary
 - Polysemy effect and intepreters to use the random-fu library in a polysemy effect union (like an mtl stack).
-- Includes an MTL "absorber" (see https://github.com/isovector/polysemy-zoo/blob/master/src/Polysemy/MTL.hs) for
-to random-fu ```MonadRandom``` typeclass.
+- Includes a constraint "absorber" (see https://github.com/isovector/polysemy-zoo/blob/master/src/Polysemy/ConstraintAbsorber.hs) for
+the random-fu ```MonadRandom``` typeclass.
 
 ## Example (from the tests)
 ```haskell
