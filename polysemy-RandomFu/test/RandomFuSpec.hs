@@ -5,6 +5,7 @@ module RandomFuSpec where
 
 import           Polysemy
 import           Polysemy.RandomFu
+import           Polysemy.ConstraintAbsorber.MonadRandom
 
 import           Test.Hspec
 import           Control.Monad                 as M

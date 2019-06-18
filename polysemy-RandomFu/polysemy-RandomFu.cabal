@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e89883775c3553509da69f581308cc459d3612e23d57d121218e9fd10404766a
+-- hash: eae1a0503816a03e0d5218be187818539f2cba48460bc5b150f75b11a2ea2dfb
 
 name:           polysemy-RandomFu
-version:        0.1.0.0
+version:        0.2.0.0
 synopsis:       Experimental, RandomFu effect and interpreters for polysemy
 description:    Please see the README on GitHub at <https://github.com/adamConnerSax/polysemy-Extra/tree/master/polysemy-RandomFu#polysemy-randomfu>
 category:       Polysemy
@@ -43,7 +43,7 @@ library
       base >=4.7 && <5
     , polysemy >=0.3
     , polysemy-plugin >0.2.0.0 && <0.4.0.0
-    , polysemy-zoo >=0.2
+    , polysemy-zoo >=0.3
     , random-fu >=0.2.5.0 && <0.3.0.0
     , random-source >=0.3 && <0.4.0.0
   default-language: Haskell2010

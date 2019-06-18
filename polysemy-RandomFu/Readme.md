@@ -1,4 +1,4 @@
-# polysemy-RandomFu v0.1.0.0
+# polysemy-RandomFu v0.2.0.0
 
 [![Build Status][travis-badge]][travis]
 [![Hackage][hackage-badge]][hackage]
