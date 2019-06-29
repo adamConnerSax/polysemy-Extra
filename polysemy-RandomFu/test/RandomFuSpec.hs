@@ -14,6 +14,9 @@ import           Control.Monad.IO.Class         ( liftIO )
 import qualified Data.Random                   as R
 import qualified Data.Random.Source.PureMT     as R
 
+import qualified Data.Random.Source.MWC as MWC
+import qualified Data.Vector as V
+
 getRandomInts :: Member RandomFu r => Int -> Sem r [Int]
 getRandomInts nDraws =
   sampleRVar $ M.replicateM nDraws (R.uniform 0 (100 :: Int))
@@ -55,6 +58,13 @@ spec = describe "RandomFu" $ do
 
         result `shouldBe` [3, 78, 53, 41, 56]
 
+  it
+      "Should produce [95, 40, 24, 49, 64], 5 pseudo-random Ints seeded from the same seed on each test, from an MWC RandomSource."
+    $ do
+      gen <- MWC.initialize (V.fromList [0])
+      result <-
+        runM . runRandomSource gen $ getRandomInts 5
+      result `shouldBe` [95, 40, 24, 49, 64]
 
   it "Should produce two distinct sets of psuedo-random Ints." $ do
     result <- runM . runRandomIO $ randomListsDifferent 5
