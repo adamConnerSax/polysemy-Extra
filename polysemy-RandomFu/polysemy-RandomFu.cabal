@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: eae1a0503816a03e0d5218be187818539f2cba48460bc5b150f75b11a2ea2dfb
+-- hash: 021b283239a40ddcbaf797aa27c8a9d851392c7b41b3609a3713d8794cd435b9
 
 name:           polysemy-RandomFu
 version:        0.2.0.0
@@ -70,4 +70,5 @@ test-suite polysemy-RandomFu-test
     , random-fu >=0.2.5.0 && <0.3.0.0
     , random-source >=0.3 && <0.4.0.0
     , text >=1.1.0.0 && <1.3.0.0
+    , vector >=0.7 && <0.13
   default-language: Haskell2010
