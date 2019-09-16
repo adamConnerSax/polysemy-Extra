@@ -66,14 +66,14 @@ sampleDist = sampleRVar . R.rvar
 runRandomSource
   :: forall s m r a
    . ( R.RandomSource m s
-     , Member (Lift m) r
+     , Member (Embed m) r
      )
   => s
   -> Sem (RandomFu ': r) a
   -> Sem r a
 runRandomSource source = interpret $ \case
-    SampleRVar    rv -> sendM $ R.runRVar (R.sample rv) source
-    GetRandomPrim pt -> sendM $ R.runRVar (R.getRandomPrim pt) source
+    SampleRVar    rv -> embed $ R.runRVar (R.sample rv) source
+    GetRandomPrim pt -> embed $ R.runRVar (R.getRandomPrim pt) source
 {-# INLINEABLE runRandomSource #-}
 
 ------------------------------------------------------------------------------
@@ -91,11 +91,11 @@ runRandomIO = interpret $ \case
 ------------------------------------------------------------------------------
 -- | Run in 'IO', using the given 'R.PureMT' source, stored in an 'IORef'
 runRandomIOPureMT
-  :: Member (Lift IO) r
+  :: Member (Embed IO) r
   => R.PureMT
   -> Sem (RandomFu ': r) a
   -> Sem r a
 runRandomIOPureMT source re =
-  sendM (newIORef source) >>= flip runRandomSource re
+  embed (newIORef source) >>= flip runRandomSource re
 {-# INLINEABLE runRandomIOPureMT #-}
 

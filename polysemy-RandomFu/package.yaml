@@ -1,5 +1,5 @@
 name:                polysemy-RandomFu
-version:             0.3.0.0
+version:             0.4.0.0
 github:              "adamConnerSax/polysemy-Extra/polysemy-RandomFu"
 license:             BSD3
 author:              "Adam Conner-Sax"
@@ -22,9 +22,9 @@ description:         Please see the README on GitHub at <https://github.com/adam
 
 dependencies:
 - base >= 4.7 && < 5
-- polysemy >= 0.3
-- polysemy-zoo >= 0.3
-- polysemy-plugin > 0.2.0.0 && < 0.4.0.0
+- polysemy >= 1.0.0 && < 1.3
+- polysemy-zoo >= 0.6.0 && < 0.7
+- polysemy-plugin > 0.2.0 && < 0.4
 - random-fu >= 0.2.5.0 && < 0.3.0.0
 - random-source >= 0.3 && < 0.4.0.0
 
