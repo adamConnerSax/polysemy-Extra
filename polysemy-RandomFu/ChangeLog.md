@@ -1,3 +1,6 @@
+## v0.4.1.0
+- Updated upper bounds for polysemy 1.3
+
 ## v0.4.0.0
 - Updated versions for polysemy (to >= 1.0.0) and polysemy-zoo.  This changes some polysemy names.
 
