@@ -16,11 +16,11 @@ import qualified Data.Random.Internal.Source   as R
 
 ------------------------------------------------------------------------------
 -- | absorb a @MonadError e@ constraint into @Member (Error e) r => Sem r@
-absorbMonadRandom :: Member RandomFu r
+absorbMonadRandom :: forall r a. Member RandomFu r
   => (R.MonadRandom (Sem r) => Sem r a) -> Sem r a
 absorbMonadRandom = absorbWithSem @R.MonadRandom @Action
-  (RandomDict getRandomPrim)
-  (Sub Dict) 
+  (RandomDict (getRandomPrim @r))
+  (Sub Dict)
 {-# INLINEABLE absorbMonadRandom #-}
 
 -- | A dictionary of the functions we need to supply
