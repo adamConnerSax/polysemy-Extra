@@ -15,14 +15,6 @@ import qualified Data.Random.Source            as R
 import qualified Data.Random.Internal.Source   as R
 
 ------------------------------------------------------------------------------
--- | absorb a @MonadError e@ constraint into @Member (Error e) r => Sem r@
-absorbMonadRandom :: forall r a. Member RandomFu r
-  => (R.MonadRandom (Sem r) => Sem r a) -> Sem r a
-absorbMonadRandom = absorbWithSem @R.MonadRandom @Action
-  (RandomDict (getRandomPrim @r))
-  (Sub Dict)
-{-# INLINEABLE absorbMonadRandom #-}
-
 -- | A dictionary of the functions we need to supply
 -- to make an instance of MonadRandom
 data RandomDict m = RandomDict { getRandomPrim_ :: forall t. R.Prim t -> m t }
@@ -36,7 +28,7 @@ newtype Action m s' a = Action { action :: m a }
   deriving (Functor, Applicative, Monad)
 
 -- | Given a reifiable mtl Error dictionary,
--- we can make an instance of @MonadError@ for the action
+-- we can make an instance of @MonadRandom@ for the action
 -- wrapped in @Action@.
 $(R.monadRandom [d|
       instance ( Monad m
@@ -46,3 +38,13 @@ $(R.monadRandom [d|
             $ getRandomPrim_ (reflect $ Proxy @s') t
           {-# INLINEABLE getRandomPrim #-}
   |])
+
+
+-- | absorb a @MonadError e@ constraint into @Member (Error e) r => Sem r@
+absorbMonadRandom :: forall r a. (Member RandomFu r)
+  => (R.MonadRandom (Sem r) => Sem r a)
+  -> Sem r a
+absorbMonadRandom = absorbWithSem @R.MonadRandom @Action
+  (RandomDict (getRandomPrim @r))
+  (Sub Dict)
+{-# INLINEABLE absorbMonadRandom #-}
