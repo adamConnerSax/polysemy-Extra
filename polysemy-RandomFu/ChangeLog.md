@@ -1,3 +1,6 @@
+## v0.4.2.1
+- Reordered template splice for ghc9
+
 ## v0.4.2.0
 - Updated upper bounds for polysemy 1.5
 

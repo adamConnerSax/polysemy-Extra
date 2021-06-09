@@ -4,10 +4,10 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 006f70d1d9e7d0715e536c99c5b34d38307cd41ef7c3012c27daff74de29d9da
+-- hash: 349bb25cc65abf6aff1ddd691ea89785dcab4cad79092dc05c66631746153a79
 
 name:           polysemy-RandomFu
-version:        0.4.1.1
+version:        0.4.2.1
 synopsis:       Experimental, RandomFu effect and interpreters for polysemy
 description:    Please see the README on GitHub at <https://github.com/adamConnerSax/polysemy-Extra/tree/master/polysemy-RandomFu#polysemy-randomfu>
 category:       Polysemy
