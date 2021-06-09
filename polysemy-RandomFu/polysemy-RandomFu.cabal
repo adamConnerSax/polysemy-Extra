@@ -1,13 +1,13 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.31.2.
+-- This file has been generated from package.yaml by hpack version 0.34.4.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 02459f2ca86576d164898f8679cc877c94a0e0a6a6d64a2bc9d9f6f97cc82adb
+-- hash: 006f70d1d9e7d0715e536c99c5b34d38307cd41ef7c3012c27daff74de29d9da
 
 name:           polysemy-RandomFu
-version:        0.4.2.0
+version:        0.4.1.1
 synopsis:       Experimental, RandomFu effect and interpreters for polysemy
 description:    Please see the README on GitHub at <https://github.com/adamConnerSax/polysemy-Extra/tree/master/polysemy-RandomFu#polysemy-randomfu>
 category:       Polysemy
@@ -18,7 +18,8 @@ maintainer:     adam_conner_sax@yahoo.com
 copyright:      2019 Adam Conner-Sax
 license:        BSD3
 license-file:   LICENSE
-tested-with:    GHC ==8.6.4
+tested-with:
+    GHC ==8.6.4
 build-type:     Simple
 extra-source-files:
     Readme.md
@@ -37,7 +38,20 @@ library
       Paths_polysemy_RandomFu
   hs-source-dirs:
       src
-  default-extensions: DataKinds DeriveFunctor FlexibleContexts GADTs LambdaCase PolyKinds RankNTypes ScopedTypeVariables StandaloneDeriving TypeApplications TypeOperators TypeFamilies UnicodeSyntax
+  default-extensions:
+      DataKinds
+      DeriveFunctor
+      FlexibleContexts
+      GADTs
+      LambdaCase
+      PolyKinds
+      RankNTypes
+      ScopedTypeVariables
+      StandaloneDeriving
+      TypeApplications
+      TypeOperators
+      TypeFamilies
+      UnicodeSyntax
   ghc-options: -fplugin=Polysemy.Plugin
   build-depends:
       base >=4.7 && <5
@@ -56,7 +70,20 @@ test-suite polysemy-RandomFu-test
       Paths_polysemy_RandomFu
   hs-source-dirs:
       test
-  default-extensions: DataKinds DeriveFunctor FlexibleContexts GADTs LambdaCase PolyKinds RankNTypes ScopedTypeVariables StandaloneDeriving TypeApplications TypeOperators TypeFamilies UnicodeSyntax
+  default-extensions:
+      DataKinds
+      DeriveFunctor
+      FlexibleContexts
+      GADTs
+      LambdaCase
+      PolyKinds
+      RankNTypes
+      ScopedTypeVariables
+      StandaloneDeriving
+      TypeApplications
+      TypeOperators
+      TypeFamilies
+      UnicodeSyntax
   ghc-options: -fplugin=Polysemy.Plugin -threaded -rtsopts -with-rtsopts=-N
   build-tool-depends:
       hspec-discover:hspec-discover >=2.0
