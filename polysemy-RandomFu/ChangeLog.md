@@ -1,3 +1,9 @@
+## v0.4.4.0
+- Bumped polysemy-plugin upper bound
+
+## v0.4.3.0
+- Bumped polysemy upper bound
+
 ## v0.4.2.1
 - Reordered template splice for ghc9
 
