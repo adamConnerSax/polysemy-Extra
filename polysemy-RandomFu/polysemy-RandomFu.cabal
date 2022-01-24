@@ -7,7 +7,7 @@ cabal-version: 1.13
 -- hash: 349bb25cc65abf6aff1ddd691ea89785dcab4cad79092dc05c66631746153a79
 
 name:           polysemy-RandomFu
-version:        0.4.4.0
+version:        0.4.4.1
 synopsis:       Experimental, RandomFu effect and interpreters for polysemy
 description:    Please see the README on GitHub at <https://github.com/adamConnerSax/polysemy-Extra/tree/master/polysemy-RandomFu#polysemy-randomfu>
 category:       Polysemy
@@ -55,7 +55,7 @@ library
   ghc-options: -fplugin=Polysemy.Plugin
   build-depends:
       base >=4.7 && <5
-    , polysemy >=1.3 && <1.7
+    , polysemy >=1.3 && <1.8
     , polysemy-plugin >0.2.0 && <0.5
     , polysemy-zoo >=0.6.0 && <0.9
     , random-fu >=0.2.7.7 && <0.3.0.0
@@ -96,6 +96,6 @@ test-suite polysemy-RandomFu-test
     , polysemy-zoo
     , random-fu
     , random-source
-    , text >=1.1.0.0 && <1.3.0.0
+    , text >=1.1.0.0 && <2.1
     , vector >=0.7 && <0.13
   default-language: Haskell2010

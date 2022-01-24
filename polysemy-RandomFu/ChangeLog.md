@@ -1,3 +1,6 @@
+## v0.4.4.1
+- Bumped polysemy and text upper bounds
+
 ## v0.4.4.0
 - Bumped polysemy-plugin upper bound
 
