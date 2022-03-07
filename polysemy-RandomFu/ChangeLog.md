@@ -1,3 +1,7 @@
+## v0.5.0.0
+- Changed lower bound on random to 1.2.1
+- Changes to use random >= 1.2.1
+
 ## v0.4.4.1
 - Bumped polysemy and text upper bounds
 

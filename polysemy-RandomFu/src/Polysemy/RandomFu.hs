@@ -1,4 +1,5 @@
 {-# LANGUAGE TemplateHaskell       #-}
+{-# LANGUAGE TypeApplications       #-}
 {-|
 Module      : Polysemy.RandomFu
 Description : Polysemy random-fu effect
@@ -38,9 +39,14 @@ import           Polysemy
 import           Data.IORef                     ( newIORef )
 import qualified Data.Random                   as R
 import qualified Data.Random.Internal.Source   as R
+import qualified Data.Random.Source.StdGen     as R
 import qualified Data.Random.Source.PureMT     as R
+import qualified Data.RVar                     as R (pureRVar)
+import Data.Random.Source.IO ()
 import           Control.Monad.IO.Class         ( MonadIO(..) )
-
+import Control.Monad.Reader.Class (MonadReader)
+import qualified System.Random.Stateful as SR
+import GHC.IORef (IORef)
 
 ------------------------------------------------------------------------------
 {- | An effect capable of sampling from a "random-fu" RVar or generating a
@@ -66,6 +72,11 @@ sampleDist = sampleRVar . R.rvar
 runRandomSource
   :: forall s m r a
    . ( R.RandomSource m s
+     , R.StatefulGen s m
+     , MonadReader s m
+     , MonadReader s R.RVar
+     , R.StatefulGen s R.RVar
+     , R.MonadRandom R.RVar
      , Member (Embed m) r
      )
   => s
@@ -80,22 +91,34 @@ runRandomSource source = interpret $ \case
 -- | Run a 'Random` effect by using the default "random-fu" 'IO' source
 runRandomIO
   :: forall r a
-   . MonadIO (Sem r)
+   . (MonadIO (Sem r)
+--     , R.Distribution R.RVar a
+--     , R.StatefulGen s IO
+     )
   => Sem (RandomFu ': r) a
   -> Sem r a
-runRandomIO = interpret $ \case
-    SampleRVar    rv -> liftIO $ R.sample rv
+runRandomIO =
+  interpret $ \case
+    SampleRVar    rv -> liftIO $ do
+      g <- SR.getStdGen
+      return $ fst $ R.pureRVar rv g
     GetRandomPrim pt -> liftIO $ R.getRandomPrim pt
+
 {-# INLINEABLE runRandomIO #-}
 
 ------------------------------------------------------------------------------
 -- | Run in 'IO', using the given 'R.PureMT' source, stored in an 'IORef'
 runRandomIOPureMT
-  :: Member (Embed IO) r
+  :: (Member (Embed IO) r
+     , MonadReader (IORef R.PureMT) R.RVar
+     , MonadReader (IORef R.PureMT) IO
+     , R.StatefulGen (IORef R.PureMT) R.RVar
+     , R.StatefulGen (IORef R.PureMT) IO
+     , R.MonadRandom R.RVar
+      )
   => R.PureMT
   -> Sem (RandomFu ': r) a
   -> Sem r a
 runRandomIOPureMT source re =
   embed (newIORef source) >>= flip runRandomSource re
 {-# INLINEABLE runRandomIOPureMT #-}
-
