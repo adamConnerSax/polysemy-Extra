@@ -1,6 +1,9 @@
+{-# LANGUAGE CPP                         #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving  #-}
 {-# LANGUAGE TemplateHaskell             #-}
-
+#if MIN_VERSION_random_fu(0,3,0)
+module Polysemy.ConstraintAbsorber.MonadRandom () where
+#else
 module Polysemy.ConstraintAbsorber.MonadRandom
   (
     absorbMonadRandom
@@ -48,3 +51,4 @@ absorbMonadRandom = absorbWithSem @R.MonadRandom @Action
   (RandomDict (getRandomPrim @r))
   (Sub Dict)
 {-# INLINEABLE absorbMonadRandom #-}
+#endif

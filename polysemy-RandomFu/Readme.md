@@ -1,4 +1,4 @@
-# polysemy-RandomFu v0.4.2.1
+# polysemy-RandomFu v0.5.0.0
 
 [![Build Status][travis-badge]][travis]
 [![Hackage][hackage-badge]][hackage]
@@ -8,6 +8,8 @@
 - Polysemy effect and intepreters to use the random-fu library in a polysemy effect union (like an mtl stack).
 - Includes a constraint "absorber" (see https://github.com/isovector/polysemy-zoo/blob/master/src/Polysemy/ConstraintAbsorber.hs) for
 the random-fu ```MonadRandom``` typeclass.
+- NB: If you compile with random-fu >= 0.3.0.0, there is no longer a constraint absorber in this library since random-fu no longer uses
+  random-source or MonadRandom.
 
 ## Example (from the tests)
 ```haskell
