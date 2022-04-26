@@ -1,19 +1,19 @@
 packages: ./polysemy-RandomFu
-allow-newer: base, ghc-prim, template-haskell, bytestring, constraints, random-fu
+allow-newer: base, ghc-prim, bytestring
 
-source-repository-package
-  type: git
-  location: https://github.com/adamConnerSax/random-fu
-  tag: a21105b269c77266bd74ec4a31e0924f7000e69a
-  subdir: random-source
+--source-repository-package
+--  type: git
+--  location: https://github.com/adamConnerSax/random-fu
+-- tag: a21105b269c77266bd74ec4a31e0924f7000e69a
+--  subdir: random-source
 
-source-repository-package
-  type: git
-  location: https://github.com/adamConnerSax/random-fu
-  tag: a21105b269c77266bd74ec4a31e0924f7000e69a
-  subdir: random-fu
+--source-repository-package
+--  type: git
+--  location: https://github.com/adamConnerSax/random-fu
+--  tag: a21105b269c77266bd74ec4a31e0924f7000e69a
+-- subdir: random-fu
 
-source-repository-package
-  type: git
-  location: https://github.com/adamConnerSax/polysemy-zoo
-  tag: 0e67a55971c74589319df3e23cb8ba9f07b33cef
+--source-repository-package
+--  type: git
+--  location: https://github.com/adamConnerSax/polysemy-zoo
+--  tag: 0e67a55971c74589319df3e23cb8ba9f07b33cef

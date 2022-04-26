@@ -1,6 +1,6 @@
 ## v0.5.0.0
-- Breaking: Foloowing random-fu >= 0.3.0.0 dropping random-source,
-  removed MonadRandom and it’s ConstraintAbsorber
+- Breaking: Following random-fu >= 0.3.0.0 we are dropping random-source.
+  removed MonadRandom and its ConstraintAbsorber
 - Changed lower bound on random to 1.2.1
 - Changes to use random >= 1.2.1
 
