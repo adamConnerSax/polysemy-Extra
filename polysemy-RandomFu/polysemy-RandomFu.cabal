@@ -32,7 +32,6 @@ source-repository head
 
 library
   exposed-modules:
-      Polysemy.ConstraintAbsorber.MonadRandom
       Polysemy.RandomFu
   other-modules:
       Paths_polysemy_RandomFu
