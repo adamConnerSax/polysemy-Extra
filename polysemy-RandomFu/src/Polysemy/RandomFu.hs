@@ -31,9 +31,12 @@ module Polysemy.RandomFu
   , sampleDist
 
     -- * Interpretations
-  , runRandomSource
   , runRandomIO
+#if MIN_VERSION_random_fu(0,3,0)
+#else
+  , runRandomSource
   , runRandomIOPureMT
+#endif
   )
 where
 
@@ -44,11 +47,7 @@ import           Polysemy.State as PS
 import           Data.IORef                     ( newIORef )
 import qualified Data.Random                   as R
 import qualified Data.Random.RVar as R
-import qualified Data.Random.Internal.Source   as R
-import qualified Data.Random.Source.StdGen     as R
-import qualified Data.Random.Source.PureMT     as R
 import qualified Data.RVar                     as R (pureRVar)
-import Data.Random.Source.IO ()
 import           Control.Monad.IO.Class         ( MonadIO(..) )
 import Control.Monad.Reader.Class (MonadReader)
 import qualified System.Random.Stateful as SR
@@ -76,25 +75,6 @@ sampleDist = sampleRVar . R.rvar
 {-# INLINEABLE sampleDist #-}
 
 ------------------------------------------------------------------------------
--- | Run a 'Random' effect using a given 'R.RandomSource'
-runRandomSource
-  :: forall s m r a
-   . (SR.StatefulGen s m
-     , R.RandomSource m s
-     , Member (Embed m) r
-     )
-  => s
-  -> Sem (RandomFu ': r) a
-  -> Sem r a
-runRandomSource source = interpret $ \case
-    SampleRVar    rv -> embed $ R.runRVar rv source
-#if MIN_VERSION_random_fu(0,3,0)
-#else
-    GetRandomPrim pt -> embed $ R.getRandomPrimFrom source pt
-#endif
-{-# INLINEABLE runRandomSource #-}
-
-------------------------------------------------------------------------------
 -- | Run a 'Random` effect by using the default "random-fu" 'IO' source
 runRandomIO
   :: forall r a
@@ -117,6 +97,24 @@ runRandomIO x = do
     x
 {-# INLINEABLE runRandomIO #-}
 
+#if MIN_VERSION_random_fu(0,3,0)
+#else
+------------------------------------------------------------------------------
+-- | Run a 'Random' effect using a given 'R.RandomSource'
+runRandomSource
+  :: forall s m r a
+   . (SR.StatefulGen s m
+     , R.RandomSource m s
+     , Member (Embed m) r
+     )
+  => s
+  -> Sem (RandomFu ': r) a
+  -> Sem r a
+runRandomSource source = interpret $ \case
+    SampleRVar    rv -> embed $ R.runRVar rv source
+    GetRandomPrim pt -> embed $ R.getRandomPrimFrom source pt
+{-# INLINEABLE runRandomSource #-}
+
 ------------------------------------------------------------------------------
 -- | Run in 'IO', using the given 'R.PureMT' source, stored in an 'IORef'
 runRandomIOPureMT
@@ -129,11 +127,9 @@ runRandomIOPureMT pMT = interpret $ \case
    SampleRVar    rv -> liftIO $ do
      g <- SR.newIOGenM pMT
      R.runRVar rv g
-#if MIN_VERSION_random_fu(0,3,0)
-#else
    GetRandomPrim pt -> liftIO $ do
      g <- newIORef pMT
      R.getRandomPrimFromMTRef g pt
-#endif
 --getRandomPrimFromMTRef   embed (SR.newIOGenM source) >>= flip runRandomSource re
 {-# INLINEABLE runRandomIOPureMT #-}
+#endif
