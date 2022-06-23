@@ -32,5 +32,8 @@ spec = describe "RandomFu" $ do
     result `shouldBe` True
   let mersenneSeed = MR.pureMT 1
   it "Should produce two distinct sets of pseudo-random ints." $ do
+    result <- runM . runStatefulRandom mersenneSeed $ randomListsDifferent 5
+    result `shouldBe` True
+  it "Should produce two distinct sets of pseudo-random ints." $ do
     result <- runM . runAtomicStatefulRandom mersenneSeed $ randomListsDifferent 5
     result `shouldBe` True
