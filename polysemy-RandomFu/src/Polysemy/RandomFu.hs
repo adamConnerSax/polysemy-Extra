@@ -6,7 +6,12 @@ Module      : Polysemy.RandomFu
 Description : Polysemy random-fu effect
 
 Polysemy "random-fu" effect.
-This can be run directly in 'IO'.
+This can be run:
+  a. Directly in 'IO'.
+  b. With a given source of entropy which will be managed by Polysemy's State
+  c. With a given source of entropy which will be managed by Polysemy's atomic state (using an IORef)
+  d. Purely, with a given source of entropy.  This is likely not what you want since every sample will get the same
+     seed.
 -}
 
 module Polysemy.RandomFu
@@ -20,6 +25,9 @@ module Polysemy.RandomFu
 
     -- * Interpretations
   , runRandomIO
+  , runStatefulRandom
+  , runRandomIOAtomic
+  , runAtomicStatefulRandom
   )
 where
 
@@ -27,15 +35,9 @@ import           Polysemy
 import           Polysemy.State as PS
 import           Polysemy.AtomicState as PAS
 
-import           Data.IORef                     ( newIORef )
 import qualified Data.Random                   as R
-import qualified Data.Random.RVar as R
 import qualified Data.RVar                     as R (pureRVar)
-import           Control.Monad.IO.Class         ( MonadIO(..) )
-import Control.Monad.Reader.Class (MonadReader)
 import qualified System.Random.Stateful as SR
-import GHC.IORef (IORef)
-import Polysemy.Law (idempotentIOProperty)
 
 ------------------------------------------------------------------------------
 {- | An effect capable of sampling from a "random-fu" RVar or generating a
@@ -59,12 +61,13 @@ sampleDist = sampleRVar . R.rvar
 -- | Run a 'Random` effect by using the default "random-fu" 'IO' source
 runRandomIO
   :: forall r a
-   . MonadIO (Sem r)
+   . Member (Embed IO) r
   => Sem (RandomFu ': r) a
   -> Sem r a
-runRandomIO x = liftIO SR.getStdGen >>= \g -> runStatefulRandom g x
+runRandomIO x = embed SR.getStdGen >>= flip runStatefulRandom x
 {-# INLINEABLE runRandomIO #-}
 
+-- | Run a 'Random` effect by using the given entropy source and managing state via Polysemy' State effect
 runStatefulRandom
   :: forall r a g
   . (R.RandomGen g)
@@ -89,10 +92,11 @@ runRandomIOAtomic
    . Member (Embed IO) r
   => Sem (RandomFu ': r) a
   -> Sem r a
-runRandomIOAtomic x = liftIO SR.getStdGen >>= \g -> runAtomicStatefulRandom g x
+runRandomIOAtomic x = embed SR.getStdGen >>= flip runAtomicStatefulRandom x
 
 {-# INLINEABLE runRandomIOAtomic #-}
 
+-- | Run a 'Random` effect by using the given entropy source and managing state via Polysemy' AtomicState effect (via IORef)
 runAtomicStatefulRandom
   :: forall r a g
   . (Member (Embed IO) r, R.RandomGen g)
@@ -114,7 +118,7 @@ runAtomicStatefulRandom g0 x = do
 -- | Run a 'Random` effect by using a given pure source of entropy
 runRandomPure
   :: forall r a g
-   . (MonadIO (Sem r), R.RandomGen g)
+   . R.RandomGen g
   => g
   -> Sem (RandomFu ': r) a
   -> Sem r a
