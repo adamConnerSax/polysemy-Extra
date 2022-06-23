@@ -1,5 +1,6 @@
 packages: ./polysemy-RandomFu
 allow-newer: base, ghc-prim, bytestring
+with-compiler: ghc-9.2.3
 
 --source-repository-package
 --  type: git
@@ -13,7 +14,7 @@ allow-newer: base, ghc-prim, bytestring
 --  tag: a21105b269c77266bd74ec4a31e0924f7000e69a
 -- subdir: random-fu
 
---source-repository-package
---  type: git
---  location: https://github.com/adamConnerSax/polysemy-zoo
---  tag: 0e67a55971c74589319df3e23cb8ba9f07b33cef
+source-repository-package
+    type: git
+    location: https://github.com/polysemy-research/polysemy-zoo
+    tag: 3b696e7a72023a9a5b86bbb78a40c535a852f48d
