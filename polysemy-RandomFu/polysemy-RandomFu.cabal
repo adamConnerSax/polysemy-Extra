@@ -91,6 +91,7 @@ test-suite polysemy-RandomFu-test
   build-depends:
       base >=4.7 && <5
     , hspec >=2.0
+    , mersenne-random-pure64 >= 0.2 && < 0.3
     , mtl >= 2.0 && < 2.3
     , polysemy
     , polysemy-RandomFu

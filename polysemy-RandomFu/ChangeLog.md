@@ -1,6 +1,7 @@
 ## v0.5.0.0
 - Breaking: Following random-fu >= 0.3.0.0 we are dropping random-source.
   removed MonadRandom and its ConstraintAbsorber
+- Added Polysemy runners using given RandomGen and regular or atomic state
 - Changed lower bound on random to 1.2.1
 - Changes to use random >= 1.2.1
 

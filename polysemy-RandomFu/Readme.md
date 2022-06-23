@@ -6,10 +6,7 @@
 
 ## Summary
 - Polysemy effect and intepreters to use the random-fu library in a polysemy effect union (like an mtl stack).
-- Includes a constraint "absorber" (see https://github.com/isovector/polysemy-zoo/blob/master/src/Polysemy/ConstraintAbsorber.hs) for
-the random-fu ```MonadRandom``` typeclass.
-- NB: If you compile with random-fu >= 0.3.0.0, there is no longer a constraint absorber in this library since random-fu no longer uses
-  random-source or MonadRandom.
+Can be used with the default System entropy (via IO) or a given source (e.g., from the mersenne-random-pure64 library)
 
 ## Example (from the tests)
 ```haskell
@@ -17,7 +14,7 @@ import           Polysemy
 import           Polysemy.RandomFu
 
 import qualified Data.Random                   as R
-import qualified Data.Random.Source.PureMT     as R
+import qualified System.Random.Mersenne.Pure64 as MR
 
 getRandomInts :: Member RandomFu r => Int -> Sem r [Int]
 getRandomInts nDraws =
@@ -25,10 +22,10 @@ getRandomInts nDraws =
 
 main :: IO ()
 main = do
-  seed <- R.newPureMT
-  putStrLn . show $ runM . runRandomIOPureMT (R.pureMT seed) $ getRandomInts 5
+  putStrLn . show $ runM . runRandomIO $ getRandomInts 5
+  putStrLn . show $ runM . runStatefulRandom (MR.pureMT 1) $ getRandomInits 5
 ```
-should print a list of 5 pseudo-random integers.
+should print two (different) lists of 5 pseudo-random integers.
 They will be different each time you run because the ```newPureMT``` function
 returns a different seed each time it's called.  If you replace that seed in
 the ```R.pureMT``` argument to ```runRandomIOPureMT``` with a fixed number
