@@ -1,4 +1,4 @@
-{-# LANGUAGE CPP                   #-}
+{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE TemplateHaskell       #-}
 {-# LANGUAGE TypeApplications      #-}
 {-|
@@ -25,6 +25,7 @@ where
 
 import           Polysemy
 import           Polysemy.State as PS
+import           Polysemy.AtomicState as PAS
 
 import           Data.IORef                     ( newIORef )
 import qualified Data.Random                   as R
@@ -34,6 +35,7 @@ import           Control.Monad.IO.Class         ( MonadIO(..) )
 import Control.Monad.Reader.Class (MonadReader)
 import qualified System.Random.Stateful as SR
 import GHC.IORef (IORef)
+import Polysemy.Law (idempotentIOProperty)
 
 ------------------------------------------------------------------------------
 {- | An effect capable of sampling from a "random-fu" RVar or generating a
@@ -60,9 +62,17 @@ runRandomIO
    . MonadIO (Sem r)
   => Sem (RandomFu ': r) a
   -> Sem r a
-runRandomIO x = do
-  g <- SR.getStdGen
-  evalState g $ reinterpret ( \case
+runRandomIO x = liftIO SR.getStdGen >>= \g -> runStatefulRandom g x
+{-# INLINEABLE runRandomIO #-}
+
+runStatefulRandom
+  :: forall r a g
+  . (R.RandomGen g)
+  => g
+  -> Sem (RandomFu ': r) a
+  -> Sem r a
+runStatefulRandom g0 x = do
+  evalState g0 $ reinterpret ( \case
     SampleRVar rv -> do
       g <- get
       let (x, g') = R.pureRVar rv g
@@ -70,4 +80,46 @@ runRandomIO x = do
       return x
     )
     x
-{-# INLINEABLE runRandomIO #-}
+{-# INLINEABLE runStatefulRandom #-}
+
+-- | Run a 'Random` effect by using the default "random-fu" 'IO' source
+-- Use Atomic state to choose behavior across threads
+runRandomIOAtomic
+  :: forall r a
+   . Member (Embed IO) r
+  => Sem (RandomFu ': r) a
+  -> Sem r a
+runRandomIOAtomic x = liftIO SR.getStdGen >>= \g -> runAtomicStatefulRandom g x
+
+{-# INLINEABLE runRandomIOAtomic #-}
+
+runAtomicStatefulRandom
+  :: forall r a g
+  . (Member (Embed IO) r, R.RandomGen g)
+  => g
+  -> Sem (RandomFu ': r) a
+  -> Sem r a
+runAtomicStatefulRandom g0 x = do
+  fmap snd $ PAS.atomicStateToIO g0 $ reinterpret ( \case
+    SampleRVar rv -> do
+      g <- PAS.atomicGet
+      let (x, g') = R.pureRVar rv g
+      PAS.atomicPut g'
+      return x
+    )
+    x
+{-# INLINEABLE runAtomicStatefulRandom #-}
+
+
+-- | Run a 'Random` effect by using a given pure source of entropy
+runRandomPure
+  :: forall r a g
+   . (MonadIO (Sem r), R.RandomGen g)
+  => g
+  -> Sem (RandomFu ': r) a
+  -> Sem r a
+runRandomPure g =
+  interpret (\case
+                SampleRVar rv -> return $ fst $ R.pureRVar rv g
+            )
+{-# INLINEABLE runRandomPure #-}
