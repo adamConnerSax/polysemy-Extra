@@ -1,6 +1,7 @@
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE TemplateHaskell       #-}
 {-# LANGUAGE TypeApplications      #-}
+{-# OPTIONS_GHC -fplugin=Polysemy.Plugin #-}
 {-|
 Module      : Polysemy.RandomFu
 Description : Polysemy random-fu effect
