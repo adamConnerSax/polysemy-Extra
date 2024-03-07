@@ -51,7 +51,6 @@ library
       TypeOperators
       TypeFamilies
       UnicodeSyntax
-  ghc-options: -fplugin=Polysemy.Plugin
   build-depends:
       base >=4.7 && <5
     , mtl >= 2.0 && < 2.5
