@@ -1,20 +1,23 @@
 packages: ./polysemy-RandomFu
-allow-newer: base, ghc-prim, bytestring
---with-compiler: ghc-9.2.3
-allow-newer: exceptions, ghc, mtl, polysemy
---source-repository-package
---  type: git
---  location: https://github.com/adamConnerSax/random-fu
--- tag: a21105b269c77266bd74ec4a31e0924f7000e69a
---  subdir: random-source
 
---source-repository-package
---  type: git
---  location: https://github.com/adamConnerSax/random-fu
---  tag: a21105b269c77266bd74ec4a31e0924f7000e69a
--- subdir: random-fu
+allow-newer: base, ghc-prim, containers, polysemy-zoo:constraints, polysemy-zoo:random
 
---source-repository-package
---    type: git
---    location: https://github.com/polysemy-research/polysemy-zoo
---    tag: 3b696e7a72023a9a5b86bbb78a40c535a852f48d
+flags: +mtl2 +base4
+
+source-repository-package
+  type: git
+  location: https://github.com/adamConnerSax/random-fu
+  tag: 26396f6db462dc91a773ea8e31aed104bf19ea4f
+  subdir: random-source
+
+source-repository-package
+  type: git
+  location: https://github.com/adamConnerSax/random-fu
+  tag: 26396f6db462dc91a773ea8e31aed104bf19ea4f
+  subdir: random-fu
+
+source-repository-package
+  type: git
+  location: https://github.com/adamConnerSax/random-fu
+  tag: 26396f6db462dc91a773ea8e31aed104bf19ea4f
+  subdir: rvar

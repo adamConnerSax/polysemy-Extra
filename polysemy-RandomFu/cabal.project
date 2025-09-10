@@ -1,1 +1,21 @@
 allow-newer: base
+
+flags: +mtl2 +base4
+
+source-repository-package
+  type: git
+  location: https://github.com/adamConnerSax/random-fu
+  tag: 26396f6db462dc91a773ea8e31aed104bf19ea4f
+  subdir: random-source
+
+source-repository-package
+  type: git
+  location: https://github.com/adamConnerSax/random-fu
+  tag: 26396f6db462dc91a773ea8e31aed104bf19ea4f
+  subdir: random-fu
+
+source-repository-package
+  type: git
+  location: https://github.com/adamConnerSax/random-fu
+  tag: 26396f6db462dc91a773ea8e31aed104bf19ea4f
+  subdir: rvar
